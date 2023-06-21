@@ -2,6 +2,8 @@ import requests
 import json
 import random
 import config
+import os
+from requests_toolbelt import MultipartEncoder
 
 base_url = 'https://petstore.swagger.io/v2'
 
@@ -9,11 +11,11 @@ base_url = 'https://petstore.swagger.io/v2'
 
 # 1 POST /pet/{petId}/uploadImage  Uploads an image
 # petId = 185818062023
-# pet_photo = 'C:\Unit.19.3.3\images\image.jpeg'
+# pet_photo = 'C:\Unit.19.3.3\images\pet\image.jpg'
 #
 #
 # def add_pet_photo():
-#     data = MultipartEncoder(fields={'pet_photo': (pet_photo, open(pet_photo, 'rb'), 'image/jpeg')})
+#     data = MultipartEncoder(fields={'pet_photo': (pet_photo, open(pet_photo, 'rb'), 'image/jpg')})
 #     print(data)
 #     headers = {'accept': 'application/json', 'Content-Type': data.content_type}
 #
@@ -74,14 +76,14 @@ res = requests.post(f'{base_url}/store/order',
 
 print(f'#8\n', res.status_code, res.json())
 
-# 9 GET /store/order/{orderId}  Find purchase order by ID (редко но бывает статус 200)
+# 9 GET /store/order/{orderId}  Find purchase order by ID (редко статус 200)
 orderId = random.randint(1, 10)
 res = requests.get(f'{base_url}/store/order/{orderId}',
                    headers={'accept': 'application/json'})
 
 print(f'#9\n', res.status_code, res.json())
 
-# 10 DELETE /store/order/{orderId}  Delete purchase order by ID (редко но бывает статус 200)
+# 10 DELETE /store/order/{orderId}  Delete purchase order by ID (редко статус 200)
 res = requests.delete(f'{base_url}/store/order/{orderId}',
                       headers={'accept': 'application/json'})
 
